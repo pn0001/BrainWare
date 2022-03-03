@@ -43,12 +43,12 @@ namespace Repositories
                    {
                        OrderId = op.order_id,
                        ProductId = op.product_id,
-                       Price = op.price ?? 1,
+                       Price = op.price ?? 0,
                        Quantity = op.quantity,
                        Product = new ProductDto()
                        {
                            Name = product.name,
-                           Price = product.price ??1
+                           Price = product.price ??0
                        }
                    };
 
