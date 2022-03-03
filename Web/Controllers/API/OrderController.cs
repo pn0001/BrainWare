@@ -1,24 +1,29 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
+using Entities;
+using Entities.Models;
+using Repositories;
+using Repositories.DAL;
+
 
 namespace Web.Controllers
-{
-    using System.Web.Mvc;
-    using Infrastructure;
-    using Models;
-
+{   
+    
     public class OrderController : ApiController
     {
-        [HttpGet]
-        public IEnumerable<Order> GetOrders(int id = 1)
-        {
-            var data = new OrderService();
+        private IOrderRepository _orderRepository;
 
-            return data.GetOrdersForCompany(id);
+        public OrderController()
+        {
+            _orderRepository = new OrderRepository(new OrderDBContext());
+        }
+
+        [HttpGet]
+        public IEnumerable<OrderDto> GetOrders(int id = 1)
+        {
+            var result = _orderRepository.GetOrdersForCompany(id);
+            return result;    
         }
     }
 }
